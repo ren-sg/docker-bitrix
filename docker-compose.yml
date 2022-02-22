@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+    nginx:
+        build: ./docker/nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./www:/var/www
+            - ./docker/logs/nginx:/var/log/nginx
+        links:
+            - php
+    php:
+        build:
+            context: ./docker/php
+            dockerfile: Dockerfile
+            target: dev
+        
+        links:
+            - mysql
+        volumes:
+            - ./www:/var/www
+            # - /etc/localtime:/etc/localtime/:ro
+    mysql:
+        build: ./docker/mysql
+        ports:
+            - "3307:3306"
+        volumes:
+            - mysql-data:/var/lib/mysql
+            - ./docker/logs/mysql:/var/log/mysql
+            - /etc/localtime:/etc/localtime/:ro
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: php_mvc
+            MYSQL_USER: php_mvc
+            MYSQL_PASSWORD: php_mvc
+
+volumes:
+    mysql-data:
+        driver: local
+    # cache:
+    #     driver: local
