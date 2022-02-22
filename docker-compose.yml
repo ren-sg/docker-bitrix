@@ -16,12 +16,20 @@ services:
             context: ./docker/php
             dockerfile: Dockerfile
             target: dev
-        
         links:
             - mysql
         volumes:
             - ./www:/var/www
+            - ./docker/logs/php:/var/log/php
             # - /etc/localtime:/etc/localtime/:ro
+    memcached:
+        image: memcached:1.6.14-alpine
+        volumes:
+            - cache:/var/lib/memcached
+            - ./docker/logs/memcached:/var/log/memcached
+        ports:
+            - '11211:11211'
+        restart: always
     mysql:
         build: ./docker/mysql
         ports:
@@ -39,5 +47,5 @@ services:
 volumes:
     mysql-data:
         driver: local
-    # cache:
-    #     driver: local
+    cache:
+        driver: local

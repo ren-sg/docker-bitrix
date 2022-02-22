@@ -1,8 +1,8 @@
 FROM nginx:latest
 
-COPY ./nginx.conf /etc/nginx/
-COPY ./upstream.conf /etc/nginx/conf.d/
-COPY ./sites-available/ /etc/nginx/sites-available/
+COPY ./conf.d/nginx.conf /etc/nginx/
+COPY ./conf.d/upstream.conf /etc/nginx/conf.d/
+COPY ./conf.d/default.conf /etc/nginx/conf.d/
 
 RUN usermod -u 1000 www-data
 
