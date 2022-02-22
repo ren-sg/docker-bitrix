@@ -13,3 +13,6 @@ www/bitrix.local/restore.php
 
 docker/logs/*
 !docker/logs/.keep
+
+docker/nginx/sites-available/*
+!docker/nginx/sites-available/default.conf
