@@ -7,9 +7,7 @@ TODO
 !.vscode/launch.json
 
 www/*
-!www/bitrix.local/
-www/bitrix.local/bitrix_server_test.php
-www/bitrix.local/restore.php
+!www/.keep
 
 docker/logs/*
 !docker/logs/.keep
