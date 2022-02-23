@@ -13,7 +13,8 @@ services:
             - php
     php:
         build:
-            context: ./docker/php
+            # context: ./docker/php
+            context: ./docker/${PHP_VERSION}
             dockerfile: Dockerfile
             target: dev
         links:
@@ -43,6 +44,8 @@ services:
             MYSQL_DATABASE: php_mvc
             MYSQL_USER: php_mvc
             MYSQL_PASSWORD: php_mvc
+        security_opt:
+            - seccomp:unconfined
 
 volumes:
     mysql-data:
