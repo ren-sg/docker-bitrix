@@ -65,6 +65,7 @@ RUN pecl update-channels pecl.php.net && pecl install mcrypt-1.0.4 && docker-php
 COPY ./php.ini /usr/local/etc/php/conf.d/php.ini
 
 RUN usermod -u 1000 www-data
+RUN chown www-data:www-data /var/log/php
 
 ## Install xdebug
 FROM base as dev

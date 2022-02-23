@@ -24,6 +24,7 @@ COPY ./php.ini /etc/php/7.4/fpm/conf.d/90-php.ini
 COPY ./php.ini /etc/php/7.4/cli/conf.d/90-php.ini
 
 RUN usermod -u 1000 www-data
+RUN chown www-data:www-data /var/log/php
 
 FROM base as dev
 WORKDIR /var/www/
