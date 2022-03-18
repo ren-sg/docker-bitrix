@@ -11,6 +11,8 @@ services:
             - ./docker/logs/nginx:/var/log/nginx
         links:
             - php
+        networks:
+            - bitrix
     php:
         build:
             context: ./docker/${PHP_VERSION}
@@ -21,6 +23,8 @@ services:
         volumes:
             - ./www:/var/www
             - ./docker/logs/php:/var/log/php
+        networks:
+            - bitrix
     memcached:
         image: memcached:1.6.14-alpine
         volumes:
@@ -29,6 +33,8 @@ services:
         ports:
             - '11211:11211'
         restart: always
+        networks:
+            - bitrix
     mysql:
         build: ./docker/mysql
         ports:
@@ -44,9 +50,16 @@ services:
             MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
         security_opt:
             - seccomp:unconfined
+        networks:
+            - bitrix
 
 volumes:
     mysql-data:
         driver: local
     cache:
         driver: local
+
+networks:
+    bitrix:
+        driver: bridge
+        # name: bitrix_network
