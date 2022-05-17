@@ -6,11 +6,12 @@ TODO
 .vscode/*
 !.vscode/launch.json
 
-www/*
+www/
 !www/.keep
 
 docker/logs/*
 !docker/logs/.keep
 
-docker/nginx/sites-available/*
+docker/nginx/sites-available/
+docker/nginx/certs/
 !docker/nginx/sites-available/default.conf

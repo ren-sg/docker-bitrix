@@ -9,6 +9,7 @@ services:
         volumes:
             - ./www:/var/www
             - ./docker/logs/nginx:/var/log/nginx
+            - ./docker/nginx/certs:/etc/nginx/certs
         links:
             - php
         networks:
